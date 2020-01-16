@@ -1,4 +1,4 @@
-# cord_player
+# Cord Player
 
 A new Flutter project.
 
