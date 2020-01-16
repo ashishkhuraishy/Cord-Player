@@ -17,7 +17,6 @@ class _HomeState extends State<Home> {
   AudioPlayerState playerState;
   String kUrl;
 
-
   @override
   void initState() {
     super.initState();
@@ -79,6 +78,8 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Cord Player"),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
       ),
       body: !loadingSongs
           ? ListView.builder(
@@ -86,11 +87,19 @@ class _HomeState extends State<Home> {
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: Colors.amberAccent,
-                    child: songs[index].albumArtwork != null ? Image.file(File(songs[index].albumArtwork)) : Image.asset("assets/images/placeholder.png"),
+                    backgroundColor: Colors.grey[100],
+                    child: Icon(
+                      Icons.music_note,
+                      color: Colors.black,
+                    ),
                   ),
-                  title: Text(songs[index].title),
-                  subtitle: Text(songs[index].duration),
+                  title: RichText(
+                    text: TextSpan(
+                      text: songs[index].title,
+                    ),
+                    maxLines: 2,
+                  ),
+                  subtitle: Text(songs[index].artist),
                   trailing: isPlaying && kUrl == songs[index].filePath
                       ? Icon(Icons.pause_circle_filled)
                       : Icon(Icons.play_circle_filled),
